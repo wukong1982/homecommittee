@@ -19,6 +19,7 @@
 
 	<script src="https://cdn.jsdelivr.net/npm/vue"></script>
 	<script src="//cdn.jsdelivr.net/npm/leancloud-storage@3.15.0/dist/av-live-query-min.js"></script>
+	<script src="//cdn.jsdelivr.net/npm/leancloud-realtime@5.0.0-beta.0/dist/realtime.browser.min.js"></script>
 	<!--
 			Google Font
 			============================================= -->
@@ -53,7 +54,7 @@
 						<li><a href="index.html">首页</a></li>						
 						<li class="menu-active"><a href="task.html">作业</a></li>
 						<li><a href="course.html">课件</a></li>						
-						<li"><a href="about.html">关于家委会</a></li>
+						<li><a href="about.html">关于家委会</a></li>
 					</ul>
 				</nav><!-- #nav-menu-container -->
 			</div>
@@ -149,6 +150,12 @@
 				}]
             }
         })
+		
+		var query = new AV.Query('task');
+        //query.equalTo('lastName', 'Smith');
+        query.find().then(function (tasks) {
+            alert(tasks);
+        });
 	</script>
 
 	<script src="js/vendor/jquery-2.2.4.min.js"></script>
