@@ -151,7 +151,11 @@
             }
         })
 		
-		var { Query, User } = AV;
+		AV.init({
+            appId: "GWr95juDjXYHC4iU2oe4xVRD-gzGzoHsz",
+            appKey: "1k8WfyhSKwQdhbJmpDRlHfmF",
+            serverURLs: "https://gwr95jud.lc-cn-n1-shared.com"
+        });
 		
 		var query = new AV.Query('task');
         query.get('5dd79fc1844bb4008872e603').then(function (todo) {
