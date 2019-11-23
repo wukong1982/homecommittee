@@ -152,6 +152,12 @@
         })
 		
 		var query = new AV.Query('task');
+        query.get('5dd79fc1844bb4008872e603').then(function (todo) {
+            var date1 = todo.get('task_date');
+			alert(date1);
+        });
+		
+		var query = new AV.Query('task');
         //query.equalTo('lastName', 'Smith');
         query.find().then(function (tasks) {
             alert(tasks);
