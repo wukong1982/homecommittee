@@ -15,8 +15,9 @@
 	<!-- meta character set -->
 	<meta charset="UTF-8">
 	<!-- Site Title -->
-	<title>Educature Education</title>
-
+	<title>家委会</title>
+	
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
 	<!--Google Font============================================= -->
 	<link href="https://fonts.googleapis.com/css?family=Montserrat:300,500,600" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500i" rel="stylesheet">
@@ -60,12 +61,12 @@
 
 	<!-- Start Banner Area -->
 	<section class="home-banner-area relative">
-		<div class="container">
+		<div id="app" class="container">
 			<div class="row fullscreen d-flex align-items-center justify-content-center">
 				<div class="banner-content col-lg-8 col-md-12">
-					<h1 class="wow fadeIn" data-wow-duration="4s">白鹭湖一(5)班 <br> 家委会</h1>
+					<h1 class="wow fadeIn" data-wow-duration="4s">{{title}}</h1>
 					<p class="text-white">
-						白鹭湖一(5)班家委会由学生家长自发组织成立，旨在更好地辅助孩子们学习。
+						{{text}}
 					</p>
 				</div>
 			</div>
@@ -76,10 +77,7 @@
 
 	<!-- Start About Area -->
 	<section class="about-area section-gap">
-		<div class="container">
-		
-		
-		
+		<div class="container">		
 			<div class="row align-items-center justify-content-center">
 				<div class="col-lg-5 col-md-6 about-left">
 					<img class="img-fluid" src="img/about.jpg" alt="">
@@ -107,22 +105,17 @@
 			</div>
 			<div class="feature-inner">
 				<div class="comment-list">
-							<div class="single-comment justify-content-between d-flex">
-								<div class="user justify-content-between d-flex">
-									<div class="thumb">
-										<img src="img/logo.png" alt="">
+							<div class="single-comment justify-content-start d-flex">
+								    <div class="thumb">
+										<img src="img/rocket.png" alt="">
 									</div>
 									<div class="desc">
-										<h5><a href="#">家委会成员招募</a></h5>
-										<p class="date">2019-11-20 </p>
-										<p class="comment">
-											家委会组建中，欢迎大家踊跃报名！
-										</p>
+										<h5>家委会成员招募</h5>
+										<p class="date">2019-11-20 </p>										
 									</div>
-								</div>
-								<div class="reply-btn">
-									<a href="" class="btn-reply text-uppercase">查看</a>
-								</div>
+									<div class="desc">
+									    &nbsp;&nbsp;家委会组建中，欢迎大家踊跃报名
+									</div>
 							</div>
 						</div>
 						
@@ -151,12 +144,19 @@
 		<a title="Go to Top" href="#"></a>
 	</div>
 	<!-- ####################### End Scroll to Top Area ####################### -->
+	
+	<script>
+	    var app = new Vue({
+            el: '#app',
+            data: {
+                title: '欢迎来到白鹭湖一(5)班家委会',
+				text: '白鹭湖一(5)班家委会由学生家长自发组织成立，旨在更好地辅助孩子们学习。'
+            }
+        })
+	</script>
 
 	<script src="js/vendor/jquery-2.2.4.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-	 crossorigin="anonymous"></script>
-	<script src="js/vendor/bootstrap.min.js"></script>
-	<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBhOdIF3Y9382fqJYt5I_sswSrEw5eihAA"></script>
+	<script src="js/vendor/bootstrap.min.js"></script>	
 	<script src="js/easing.min.js"></script>
 	<script src="js/hoverIntent.js"></script>
 	<script src="js/superfish.min.js"></script>
@@ -172,6 +172,8 @@
 	<script src="js/jquery.counterup.min.js"></script>
 	<script src="js/mail-script.js"></script>
 	<script src="js/main.js"></script>
+	
+	
 </body>
 
 </html>

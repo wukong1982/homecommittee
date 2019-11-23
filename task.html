@@ -15,8 +15,10 @@
 	<!-- meta character set -->
 	<meta charset="UTF-8">
 	<!-- Site Title -->
-	<title>About</title>
+	<title>家委会</title>
 
+	<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+	<script src="//cdn.jsdelivr.net/npm/leancloud-storage@3.15.0/dist/av-live-query-min.js"></script>
 	<!--
 			Google Font
 			============================================= -->
@@ -72,21 +74,21 @@
 		<div class="container">
 			<h3 class="mb-30">作业</h3>
 			<div class="progress-table-wrap">
-					<div class="progress-table">
+					<div id="app" class="progress-table">
 						<div class="table-head">							
 							<div class="visit">日期</div>
 							<div class="country">科目</div>
 							<div class="country">作业描述</div>
 							<div class="country">附件</div>
 						</div>
-						<div class="table-row">
-						    <div class="visit">2019-11-22</div>
-							<div class="visit">数学</div>
+						<div class="table-row" v-for="task in tasks">
+						    <div class="visit">{{task.task_date}}</div>
+							<div class="visit">{{task.task_subject}}</div>
 							<div class="country">
-							重3
+							{{task.task_desc}}
 							</div>
 							<div class="country">
-								<a href="http://lc-GWr95juD.cn-n1.lcfile.com/e6fcd0ea0c4ed818ab4d/%E9%87%8D3.docx">下载</a>
+								<a v-bind:href="task.task_url">下载</a>
 							</div>
 						</div>
 						<div class="table-row">
@@ -135,12 +137,22 @@
 	<!-- End Footer Area -->
 
 	<!-- ####################### End Scroll to Top Area ####################### -->
+	<script>
+	    var app = new Vue({
+            el: '#app',
+            data: {
+			    tasks : [{
+				    task_date: '2019-11-22',
+					task_subject: '数学',
+					task_desc: '重3',
+					task_url: 'http://lc-GWr95juD.cn-n1.lcfile.com/e6fcd0ea0c4ed818ab4d/%E9%87%8D3.docx'
+				}]
+            }
+        })
+	</script>
 
 	<script src="js/vendor/jquery-2.2.4.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-	 crossorigin="anonymous"></script>
 	<script src="js/vendor/bootstrap.min.js"></script>
-	<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBhOdIF3Y9382fqJYt5I_sswSrEw5eihAA"></script>
 	<script src="js/easing.min.js"></script>
 	<script src="js/hoverIntent.js"></script>
 	<script src="js/superfish.min.js"></script>
@@ -156,6 +168,7 @@
 	<script src="js/jquery.counterup.min.js"></script>
 	<script src="js/mail-script.js"></script>
 	<script src="js/main.js"></script>
+
 </body>
 
 </html>
