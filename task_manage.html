@@ -79,17 +79,19 @@
 							<div class="visit">日期</div>
 							<div class="country">科目</div>
 							<div class="country">作业描述</div>
-							<div class="country">附件</div>
+							<div class="visit">附件</div>
+							<div class="visit">操作</div>
 						</div>
-						<div class="table-row" v-for="task in tasks">
+						<div class="table-row" v-for="task in tasks">						    
 						    <div class="visit">{{task.task_date.iso}}</div>
 							<div class="visit">{{task.task_subject}}</div>
 							<div class="country">
 							{{task.task_desc}}
 							</div>
-							<div class="country">
+							<div class="visit">
 								<a v-bind:href="task.task_url">下载</a>
 							</div>
+							<div class="visit"><a v-bind:href="'task_edit.html?id=' + task.objectId">修改</a></div>
 						</div>
 						<div class="table-row">
 						    <div class="visit">2019-11-22</div>
@@ -185,6 +187,8 @@
             headers : {'X-Bmob-Application-Id':'3bea17a55823d07e2487d6db68a04ba0', 'X-Bmob-REST-API-Key':'c8069787cb4ff2c10d99dae927667233', 'Content-Type':'application/json'},
             //请求成功的回调函数
             success: function(data){
+                alert(JSON.stringify(data));
+				alert(data.results[0].task_date);
 				app.tasks = data.results;
             },
         });

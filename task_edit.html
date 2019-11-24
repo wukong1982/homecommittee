@@ -75,47 +75,29 @@
 			<h3 class="mb-30">作业</h3>
 			<div class="progress-table-wrap">
 					<div id="app" class="progress-table">
-						<div class="table-head">							
-							<div class="visit">日期</div>
-							<div class="country">科目</div>
-							<div class="country">作业描述</div>
-							<div class="country">附件</div>
+					    <div class="table-row">						    
+						    <div class="visit">布置时间</div>
+							<div class="visit">{{task_date}}</div>
 						</div>
-						<div class="table-row" v-for="task in tasks">
-						    <div class="visit">{{task.task_date.iso}}</div>
-							<div class="visit">{{task.task_subject}}</div>
-							<div class="country">
-							{{task.task_desc}}
-							</div>
-							<div class="country">
-								<a v-bind:href="task.task_url">下载</a>
-							</div>
+						<div class="table-row">						    
+						    <div class="visit">科目</div>
+							<div class="visit"><input name="task_subject" v-model="task_subject"></div>
 						</div>
-						<div class="table-row">
-						    <div class="visit">2019-11-22</div>
-							<div class="visit">数学</div>
-							<div class="country">
-							重4
-							</div>
-							<div class="country">
-								<a href="http://lc-GWr95juD.cn-n1.lcfile.com/a4930c675e4131d94c45/%E9%87%8D4.doc">下载</a>
-							</div>
+						<div class="table-row">						    
+						    <div class="visit">作业描述</div>
+							<div class="visit"><input name="task_subject" v-model="task_desc"></div>
+						</div>
+						<div class="table-row">						    
+						    <div class="visit">作业链接</div>
+							<div class="visit"><input name="task_subject" v-model="task_url"></div>
 						</div>
 						<div class="table-row">
-						    <div class="visit">2019-11-22</div>
-							<div class="visit">数学</div>
-							<div class="country">
-							周末数学学习:
-1.一张周末练习，已经发在了孩子的数学书里面，请认真参考样卷，尤其是旁边的标注。
-2.完成重点题型3和重点题型4。解题思路见视频，视频在课件里。
-							</div>
-							<div class="country">
-								
-							</div>
+						    <input type="button" onclick="save()" value="保存">
 						</div>
 					</div>
 				</div>
 		</div>
+		
 	</section>
 	<!-- End About Area -->
 
@@ -137,20 +119,6 @@
 	<!-- End Footer Area -->
 
 	<!-- ####################### End Scroll to Top Area ####################### -->
-	<script>
-	    var app = new Vue({
-            el: '#app',
-            data: {
-			    tasks : [{
-				    task_date: '2019-11-22',
-					task_subject: '数学',
-					task_desc: '重3',
-					task_url: 'http://lc-GWr95juD.cn-n1.lcfile.com/e6fcd0ea0c4ed818ab4d/%E9%87%8D3.docx'
-				}]
-            }
-        })
-	</script>
-
 	<script src="js/vendor/jquery-2.2.4.min.js"></script>
 	<script src="js/vendor/bootstrap.min.js"></script>
 	<script src="js/easing.min.js"></script>
@@ -168,13 +136,30 @@
 	<script src="js/jquery.counterup.min.js"></script>
 	<script src="js/mail-script.js"></script>
 	<script src="js/main.js"></script>
-
-	<script>
-	    $.ajax({
+	
+	<script>	
+	    function getQueryVariable(variable)
+        {
+            var query = window.location.search.substring(1);
+            var vars = query.split("&");
+            for (var i=0;i<vars.length;i++) {
+               var pair = vars[i].split("=");
+               if(pair[0] == variable){return pair[1];}
+            }
+            return(false);
+        }
+		
+		var id=getQueryVariable("id");
+		var task_date = "";
+		var task_subject = "";
+		var task_desc = "";
+		var task_url = "";
+		
+		$.ajax({
             //请求类型，这里为POST
             type: 'GET',
             //你要请求的api的URL
-            url: 'https://api2.bmob.cn/1/classes/task',
+            url: 'https://api2.bmob.cn/1/classes/task/' + id,
             //是否使用缓存
             cache:false,
             //数据类型，这里我用的是json
@@ -183,54 +168,49 @@
             data: JSON.stringify({}), //
             //添加额外的请求头
             headers : {'X-Bmob-Application-Id':'3bea17a55823d07e2487d6db68a04ba0', 'X-Bmob-REST-API-Key':'c8069787cb4ff2c10d99dae927667233', 'Content-Type':'application/json'},
+			async: false,
             //请求成功的回调函数
             success: function(data){
-				app.tasks = data.results;
-            },
+                alert(JSON.stringify(data));
+				task_date = data.task_date;
+				task_subject = data.task_subject;
+				task_desc = data.task_desc;
+				task_url = data.task_url;
+			},
         });
+
+	    var app = new Vue({
+            el: '#app',
+            data: {
+			    task_date: task_date.iso,
+				task_subject: task_subject,
+				task_desc: task_desc,
+				task_url: task_url
+            }
+        })
 		
-	    /*
-		$.ajax({
-            //请求类型，这里为POST
-            type: 'POST',
-            //你要请求的api的URL
-            url: 'https://api2.bmob.cn/1/classes/task' ,
-            //是否使用缓存
-            cache:false,
-            //数据类型，这里我用的是json
-            dataType: "json", 
-            //必要的时候需要用JSON.stringify() 将JSON对象转换成字符串
-            data: JSON.stringify({task_desc:'重3'}), //
-            //添加额外的请求头
-            headers : {'X-Bmob-Application-Id':'3bea17a55823d07e2487d6db68a04ba0', 'X-Bmob-REST-API-Key':'c8069787cb4ff2c10d99dae927667233', 'Content-Type':'application/json'},
-            //请求成功的回调函数
-            success: function(data){
-                
-            },
-        });
-		*/
 		
-		/*
+		function save() {
 		$.ajax({
             //请求类型，这里为POST
             type: 'PUT',
             //你要请求的api的URL
-            url: 'https://api2.bmob.cn/1/classes/task/47f9d2af54' ,
+            url: 'https://api2.bmob.cn/1/classes/task/' + id ,
             //是否使用缓存
             cache:false,
             //数据类型，这里我用的是json
             dataType: "json", 
             //必要的时候需要用JSON.stringify() 将JSON对象转换成字符串
-            data: JSON.stringify({"task_date": {"__type": "Date", "iso": "2019-11-22 00:00:00"}}), //
+            data: JSON.stringify({"task_subject": app.task_subject, "task_desc": app.task_desc, "task_url": app.task_url}), //
             //添加额外的请求头
             headers : {'X-Bmob-Application-Id':'3bea17a55823d07e2487d6db68a04ba0', 'X-Bmob-REST-API-Key':'c8069787cb4ff2c10d99dae927667233', 'Content-Type':'application/json'},
             //请求成功的回调函数
             success: function(data){
-                alert(data);
+                alert("保存成功");
             },
         });
-		*/
-	</script>
+		}
+ 	</script>
 </body>
 
 </html>
