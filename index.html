@@ -111,7 +111,7 @@
 									</div>
 									<div class="desc">
 										<h5>{{ announcement.title }}</h5>
-										<p class="date"> {{announcement.updatedAt}} </p>										
+										<p class="date"> {{announcement.updatedAt ? announcement.updatedAt.substring(0, 10) : ""}} </p>										
 									</div>
 									<div class="desc">
 									    &nbsp;&nbsp;{{announcement.content}}

@@ -82,7 +82,7 @@
 							<div class="country">附件</div>
 						</div>
 						<div class="table-row" v-for="task in tasks">
-						    <div class="visit">{{task.task_date.iso}}</div>
+						    <div class="visit">{{task.task_date ? (task.task_date.iso ? task.task_date.iso.substring(0, 10) : "") : ""}}</div>
 							<div class="visit">{{task.task_subject}}</div>
 							<div class="country">
 							{{task.task_desc}}
