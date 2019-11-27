@@ -87,19 +87,9 @@
 							{{course.course_desc}}
 							</div>
 							<div class="country">
-								<a v-bind:href="course.course_url">下载</a>
+								<span v-if="course.course_url"><a v-bind:href="course.course_url">下载</a></span>
 							</div>
-						</div>
-						<div class="table-row">
-						    <div class="visit">2019-11-22</div>
-							<div class="visit">数学</div>
-							<div class="country">
-							重4
-							</div>
-							<div class="country">
-								
-							</div>
-						</div>
+						</div>						
 					</div>
 				</div>
 		</div>
@@ -127,12 +117,7 @@
 	    var app = new Vue({
             el: '#app',
             data: {
-			    courses : [{
-				    course_date: '2019-11-22',
-					course_subject: '数学',
-					course_desc: '重3',
-					
-				}]
+			    courses : []
             }
         })
 	</script>
@@ -157,6 +142,26 @@
 	<script src="js/mail-script.js"></script>
 	<script src="js/main.js"></script>
 
+    <script>
+	    $.ajax({
+            //请求类型，这里为POST
+            type: 'GET',
+            //你要请求的api的URL
+            url: 'https://api2.bmob.cn/1/classes/course',
+            //是否使用缓存
+            cache:false,
+            //数据类型，这里我用的是json
+            dataType: "json", 
+            //必要的时候需要用JSON.stringify() 将JSON对象转换成字符串
+            data: JSON.stringify({}), //
+            //添加额外的请求头
+            headers : {'X-Bmob-Application-Id':'3bea17a55823d07e2487d6db68a04ba0', 'X-Bmob-REST-API-Key':'c8069787cb4ff2c10d99dae927667233', 'Content-Type':'application/json'},
+            //请求成功的回调函数
+            success: function(data){
+				app.courses = data.results;
+            },
+        });
+	</script>
 </body>
 
 </html>

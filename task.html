@@ -88,31 +88,9 @@
 							{{task.task_desc}}
 							</div>
 							<div class="country">
-								<a v-bind:href="task.task_url">下载</a>
+								<span v-if="task.task_url"><a v-bind:href="task.task_url">下载</a></span>
 							</div>
-						</div>
-						<div class="table-row">
-						    <div class="visit">2019-11-22</div>
-							<div class="visit">数学</div>
-							<div class="country">
-							重4
-							</div>
-							<div class="country">
-								<a href="http://lc-GWr95juD.cn-n1.lcfile.com/a4930c675e4131d94c45/%E9%87%8D4.doc">下载</a>
-							</div>
-						</div>
-						<div class="table-row">
-						    <div class="visit">2019-11-22</div>
-							<div class="visit">数学</div>
-							<div class="country">
-							周末数学学习:
-1.一张周末练习，已经发在了孩子的数学书里面，请认真参考样卷，尤其是旁边的标注。
-2.完成重点题型3和重点题型4。解题思路见视频，视频在课件里。
-							</div>
-							<div class="country">
-								
-							</div>
-						</div>
+						</div>						
 					</div>
 				</div>
 		</div>
@@ -141,12 +119,7 @@
 	    var app = new Vue({
             el: '#app',
             data: {
-			    tasks : [{
-				    task_date: '2019-11-22',
-					task_subject: '数学',
-					task_desc: '重3',
-					task_url: 'http://lc-GWr95juD.cn-n1.lcfile.com/e6fcd0ea0c4ed818ab4d/%E9%87%8D3.docx'
-				}]
+			    tasks : []
             }
         })
 	</script>
@@ -190,8 +163,9 @@
         });
 		
 	    /*
+		添加
 		$.ajax({
-            //请求类型，这里为POST
+            //请求类型
             type: 'POST',
             //你要请求的api的URL
             url: 'https://api2.bmob.cn/1/classes/task' ,
@@ -211,8 +185,9 @@
 		*/
 		
 		/*
+		更新
 		$.ajax({
-            //请求类型，这里为POST
+            //请求类型
             type: 'PUT',
             //你要请求的api的URL
             url: 'https://api2.bmob.cn/1/classes/task/47f9d2af54' ,
